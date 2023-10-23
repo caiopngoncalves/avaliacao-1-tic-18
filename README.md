@@ -1,2 +1,13 @@
+
 # avaliacao-1-tic-18
-tic-18 residency assessment test
+
+A practical evaluative test on structured programming and object-oriented paradigm.
+
+## Autores
+
+- [@caiopngoncalves](https://github.com/caiopngoncalves)
+- [@EzekLobo](https://github.com/EzekLobo)
+- [@raisimoes](https://github.com/raisimoes)
+- [@renatabamberg](https://github.com/renatabamberg)
+- [@MarcosVTG](https://github.com/MarcosVTG)
+
