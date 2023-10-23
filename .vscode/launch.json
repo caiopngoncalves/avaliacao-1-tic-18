@@ -7,9 +7,9 @@
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
-      "externalConsole": true,
-      "cwd": ".",
-      "program": "build/Debug/outDebug",
+      "externalConsole": false,
+      "cwd": "/home/renata-amaral-bamberg/Área de trabalho/av1/avaliacao-1-tic-18/individual/renata",
+      "program": "/home/renata-amaral-bamberg/Área de trabalho/av1/avaliacao-1-tic-18/individual/renata/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
