@@ -108,14 +108,18 @@ public:
       cout << "Paciente encontrado. Realize as alteracoes:" << endl;
       string novoNome, novaDtNascimento;
 
+      cout << "Novo CPF: ";
+      cin>>cpf;
+      pacientes[indice].setCPF(cpf);
+
       cout << "Novo nome: ";
       cin.ignore();
       getline(cin, novoNome);
-      setNome(novoNome);
+      pacientes[indice].setNome(novoNome);
 
       cout << "Nova data de nascimento (dd/mm/aaaa): ";
       cin >> novaDtNascimento;
-      setDtNascimento(novaDtNascimento);
+      pacientes[indice].setDtNascimento(novaDtNascimento);
 
       cout << "Dados do paciente alterados com sucesso!" << endl;
     } else {
