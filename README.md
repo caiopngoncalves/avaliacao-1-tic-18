@@ -9,4 +9,5 @@ A practical evaluative test on structured programming and object-oriented paradi
 - [@EzekLobo](https://github.com/EzekLobo)
 - [@raisimoes](https://github.com/raisimoes)
 - [@renatabamberg](https://github.com/renatabamberg)
+- [@MarcosVTG](https://github.com/MarcosVTG)
 
