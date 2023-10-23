@@ -160,7 +160,11 @@ private:
   string especialidade;
 
 public:
-  Medico() {}
+  Medico(string novoCRM, string novoNome, string novaEspecialidade) {
+    setCRM(novoCRM);
+    setNome(novoNome);
+    setEspecialidade(novaEspecialidade);
+}
 
   // Getters e Setters
 
@@ -222,18 +226,28 @@ public:
     cout << "Medico incluido com sucesso!" << endl;
   }
 
-  void excluirMedico(vector<Medico> &medicos) {
-    string crm;
-    cout << "CRM do medico a ser excluido: ";
+  void incluirMedico(vector<Medico> &medicos) {
+    string crm, nome, especialidade;
+    cout << "CRM do medico: ";
     cin >> crm;
-    int indice = buscarMedicoPorCRM(medicos, crm);
-    if (indice != -1) {
-      medicos.erase(medicos.begin() + indice);
-      cout << "Medico excluido com sucesso!" << endl;
-    } else {
-      cout << "Medico não encontrado." << endl;
+
+    if (buscarMedicoPorCRM(medicos, crm) != -1) {
+        cout << "CRM ja existe. Nao e possivel incluir o medico." << endl;
+        return;
     }
-  }
+
+    cout << "Nome do medico: ";
+    cin.ignore();
+    getline(cin, nome);
+
+    cout << "Especialidade do medico: ";
+    getline(cin, especialidade);
+
+    Medico novoMedico(crm, nome, especialidade);
+    medicos.push_back(novoMedico);
+    cout << "Medico incluido com sucesso!" << endl;
+}
+
 
   void alterarMedico(vector<Medico> &medicos) {
     string crm;
@@ -241,7 +255,7 @@ public:
     cin >> crm;
     int indice = buscarMedicoPorCRM(medicos, crm);
     if (indice != -1) {
-      cout << "Médico encontrado. Realize as alterações:" << endl;
+      cout << "Medico encontrado. Realize as alteracoes:" << endl;
       string novoNome, novaEspecialidade;
 
       cout << "Novo CRM: ";
@@ -398,7 +412,7 @@ void gerenciarMedicos(vector<Medico> &medicos) {
         case 0:
             return;
         default:
-            cout << "Opção invalida. Tente novamente." << endl;
+            cout << "Opcao invalida. Tente novamente." << endl;
             break;
         }
     }
