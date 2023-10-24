@@ -105,7 +105,12 @@ public:
     cin >> cpf;
     int indice = buscarPacientePorCPF(pacientes, cpf);
     if (indice != -1) {
-        cout << "Paciente encontrado. Realize as alteracoes:" << endl;
+        cout <<endl<< "Paciente encontrado. Aqui estao as informacoes atuais:" << endl;
+        cout << "CPF: " << pacientes[indice].getCPF() << endl;
+        cout << "Nome: " << pacientes[indice].getNome() << endl;
+        cout << "Data de Nascimento: " << pacientes[indice].getDtNascimento() << endl;
+        
+        cout << "Realize as alteracoes:" << endl;
         string novoNome, novaDataNascimento;
 
         cout << "Deseja alterar o nome (S/N)? ";
@@ -127,11 +132,12 @@ public:
             pacientes[indice].setDtNascimento(novaDataNascimento);
         }
 
-        cout << "Pocesso de alteacao teminado!" << endl;
+        cout << "Processo de alteração terminado!" << endl;
     } else {
-        cout << "Paciente não encontrado." << endl;
+        cout << "Paciente nao encontrado." << endl;
     }
 }
+
 
   void listarPacientes(const vector<Paciente> &pacientes) {
     cout << "\nLista de Pacientes:" << endl;
@@ -172,7 +178,7 @@ public:
 
   void setCRM(string novoCRM) {
     while (!regex_match(novoCRM, regex("\\d{5}"))) {
-      cout << "CRM invalido. Deve conter 5 dígitos numericos. Digite novamente: ";
+      cout << "CRM invalido. Deve conter 5 digitos numericos. Digite novamente: ";
       cin >> novoCRM;
     }
     crm = novoCRM;
@@ -241,13 +247,18 @@ public:
     }
   }
 
-  void alterarMedico(vector<Medico> &medicos) {
+ void alterarMedico(vector<Medico> &medicos) {
     string crm;
-    cout << "CRM do médico a ser alterado: ";
+    cout << "CRM do medico a ser alterado: ";
     cin >> crm;
     int indice = buscarMedicoPorCRM(medicos, crm);
     if (indice != -1) {
-        cout << "Médico encontrado. Realize as alterações:" << endl;
+        cout <<endl<< "Medico encontrado. Aqui estão as informacoes atuais:" << endl;
+        cout << "CRM: " << medicos[indice].getCRM() << endl;
+        cout << "Nome: " << medicos[indice].getNome() << endl;
+        cout << "Especialidade: " << medicos[indice].getEspecialidade() << endl;
+        
+        cout << "Realize as alteracoes:" << endl;
         string novoNome, novaEspecialidade;
 
         cout << "Deseja alterar o nome (S/N)? ";
@@ -269,9 +280,9 @@ public:
             medicos[indice].setEspecialidade(novaEspecialidade);
         }
 
-        cout << "Dados do médico alterados com sucesso!" << endl;
+        cout << "Dados do medico alterados com sucesso!" << endl;
     } else {
-        cout << "Médico não encontrado." << endl;
+        cout << "Medico nao encontrado." << endl;
     }
 }
 
@@ -296,7 +307,7 @@ public:
       cout << "Nome: " << medicoEncontrado.getNome() << endl;
       cout << "Especialidade: " << medicoEncontrado.getEspecialidade() << endl;
     } else {
-      cout << "Médico não encontrado." << endl;
+      cout << "Medico nao encontrado." << endl;
     }
   }
 };
