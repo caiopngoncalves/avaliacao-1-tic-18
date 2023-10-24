@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -160,6 +161,121 @@ public:
     void setConvenio(string _Convenio)
     {
         this->convenio = _Convenio;
+    }
+};
+class GerenciadorPacientes
+{
+private:
+    vector<Paciente> pacientes;
+
+public:
+    void incluirPaciente()
+    {
+        string cpf, nome, dtNascimento;
+        cout << "CPF: ";
+        cin >> cpf;
+        cout << "Nome: ";
+        cin.ignore();
+        getline(cin, nome);
+        cout << "Data de Nascimento: ";
+        cin >> dtNascimento;
+
+        pacientes.push_back(Paciente(nome, cpf, dtNascimento));
+    }
+
+    void excluirPaciente()
+    {
+        string cpf;
+        cout << "Informe o CPF do paciente a ser excluído: ";
+        cin >> cpf;
+
+        for (auto it = pacientes.begin(); it != pacientes.end(); ++it)
+        {
+            if (it->getCPF() == cpf)
+            {
+                pacientes.erase(it);
+                cout << "Paciente excluído com sucesso.\n";
+                return;
+            }
+        }
+
+        cout << "Paciente nao encontrado.\n";
+    }
+
+    void alterarPaciente()
+    {
+        string cpf, data;
+        cout << "Informe o CPF do paciente a ser alterado: ";
+        cin >> cpf;
+
+        for (auto &paciente : pacientes)
+        {
+            if (paciente.getCPF() == cpf)
+            {
+                cout << "Novo Nome: ";
+                cin.ignore();
+                getline(cin, paciente.Nome);
+                cout << "Nova Data de Nascimento: ";
+                cin >> data;
+                paciente.setDtNascimento(data);
+                cout << "Paciente alterado com sucesso.\n";
+                return;
+            }
+        }
+
+        cout << "Paciente nao encontrado.\n";
+    }
+
+    void listarPacientes()
+    {
+        cout << "Lista de Pacientes:\n";
+        for (auto paciente : pacientes)
+        {
+            cout << "CPF: " << paciente.getCPF() << ", Nome: " << paciente.Nome << ", Data de Nascimento: " << paciente.getDtNascimento() << endl;
+        }
+    }
+
+    void localizarPaciente()
+    {
+        string cpf;
+        cout << "Informe o CPF do paciente: ";
+        cin >> cpf;
+
+        for (auto &paciente : pacientes)
+        {
+            if (paciente.getCPF() == cpf)
+            {
+                cout << "Paciente encontrado:\n";
+                cout << "CPF: " << paciente.getCPF() << ", Nome: " << paciente.Nome << ", Data de Nascimento: " << paciente.getDtNascimento() << endl;
+                return;
+            }
+        }
+
+        cout << "Paciente nao encontrado.\n";
+    }
+
+    bool pacienteExiste(string cpf)
+    {
+        for (auto &paciente : pacientes)
+        {
+            if (paciente.getCPF() == cpf)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    Paciente *getPacientePorCPF(string cpf)
+    {
+        for (auto &paciente : pacientes)
+        {
+            if (paciente.getCPF() == cpf)
+            {
+                return &paciente;
+            }
+        }
+        return nullptr;
     }
 };
 
