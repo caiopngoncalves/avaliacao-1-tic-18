@@ -561,7 +561,6 @@ public:
         }
 
         cout << "Consulta nao encontrada.\n";
-
     }
 
     void listarConsultas()
@@ -584,8 +583,171 @@ public:
     }
 };
 
+class App
+{
+private:
+    GerenciadorPacientes gerenciadorPacientes;
+    GerenciadorMedicos gerenciadorMedicos;
+    GerenciadorConsultas gerenciadorConsultas;
+
+public:
+    void menuPacientes()
+    {
+        int opcao;
+        do
+        {
+            cout << "\nMenu de Opcoes (Pacientes):\n";
+            cout << "1. Incluir\n";
+            cout << "2. Excluir\n";
+            cout << "3. Alterar\n";
+            cout << "4. Listar\n";
+            cout << "5. Localizar\n";
+            cout << "0. Voltar para menu anterior\n";
+            cout << "Escolha uma opcao: ";
+            cin >> opcao;
+
+            switch (opcao)
+            {
+            case 1:
+                gerenciadorPacientes.incluirPaciente();
+                break;
+            case 2:
+                gerenciadorPacientes.excluirPaciente();
+                break;
+            case 3:
+                gerenciadorPacientes.alterarPaciente();
+                break;
+            case 4:
+                gerenciadorPacientes.listarPacientes();
+                break;
+            case 5:
+                gerenciadorPacientes.localizarPaciente();
+                break;
+            case 0:
+                cout << "Saindo do menu de pacientes.\n";
+                break;
+            default:
+                cout << "Opcao invalida. Tente novamente.\n";
+            }
+        } while (opcao != 0);
+    }
+
+    void menuMedicos()
+    {
+        int opcao;
+        do
+        {
+            cout << "\nMenu de Opcoes (Medicos):\n";
+            cout << "1. Incluir\n";
+            cout << "2. Excluir\n";
+            cout << "3. Alterar\n";
+            cout << "4. Listar\n";
+            cout << "5. Localizar\n";
+            cout << "0. Voltar para menu anterior\n";
+            cout << "Escolha uma opcao: ";
+            cin >> opcao;
+
+            switch (opcao)
+            {
+            case 1:
+                gerenciadorMedicos.incluirMedico();
+                break;
+            case 2:
+                gerenciadorMedicos.excluirMedico();
+                break;
+            case 3:
+                gerenciadorMedicos.alterarMedico();
+                break;
+            case 4:
+                gerenciadorMedicos.listarMedicos();
+                break;
+            case 5:
+                gerenciadorMedicos.localizarMedico();
+                break;
+            case 0:
+                cout << "Saindo do menu de medicos.\n";
+                break;
+            default:
+                cout << "Opcao inválida. Tente novamente.\n";
+            }
+        } while (opcao != 0);
+    }
+
+    void menuConsultas()
+    {
+        int opcao;
+        do
+        {
+            cout << "\nMenu de Opcoes (Consultas):\n";
+            cout << "1. Incluir Consulta\n";
+            cout << "2. Excluir Consulta\n";
+            cout << "3. Alterar Consulta\n";
+            cout << "4. Listar Consultas\n";
+            cout << "0. Voltar para menu anterior\n";
+            cout << "Escolha uma opcao: ";
+            cin >> opcao;
+
+            switch (opcao)
+            {
+            case 1:
+                gerenciadorConsultas.incluirConsulta(gerenciadorPacientes, gerenciadorMedicos);
+                break;
+            case 2:
+                gerenciadorConsultas.excluirConsulta(gerenciadorMedicos);
+                break;
+            case 3:
+                gerenciadorConsultas.alterarConsulta(gerenciadorMedicos);
+                break;
+            case 4:
+                gerenciadorConsultas.listarConsultas();
+                break;
+            case 0:
+                cout << "Saindo do menu de consultas.\n";
+                break;
+            default:
+                cout << "Opcao invalida. Tente novamente.\n";
+            }
+        } while (opcao != 0);
+    }
+
+    void executar()
+    {
+        int opcao;
+        do
+        {
+            cout << "\nMenu Principal:\n";
+            cout << "1. Gerenciar Pacientes\n";
+            cout << "2. Gerenciar Medicos\n";
+            cout << "3. Gerenciar Consultas\n";
+            cout << "0. Sair\n";
+            cout << "Escolha uma opcão: ";
+            cin >> opcao;
+
+            switch (opcao)
+            {
+            case 1:
+                menuPacientes();
+                break;
+            case 2:
+                menuMedicos();
+                break;
+            case 3:
+                menuConsultas();
+                break;
+            case 0:
+                cout << "Saindo do programa.\n";
+                break;
+            default:
+                cout << "Opcao invalida. Tente novamente.\n";
+            }
+        } while (opcao != 0);
+    }
+};
+
 int main()
 {
-    std::cout << "Hello World!";
+    App app;
+    app.executar();
+
     return 0;
 }
