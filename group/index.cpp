@@ -79,6 +79,90 @@ public:
     }
 };
 
+class Consulta
+{
+    Paciente *paciente;
+    Medico *medico;
+    bool realizada;
+    string dataHora;
+    string duracao;
+    string convenio;
+
+public:
+    Consulta(Paciente *_Paciente, Medico *_Medico, bool _Realizada, string _DataHora, string _Duracao, string _Convenio)
+    {
+        this->paciente = _Paciente;
+        this->medico = _Medico;
+        this->realizada = _Realizada;
+        this->dataHora = _DataHora;
+        this->duracao = _Duracao;
+        this->convenio = _Convenio;
+    }
+
+    Paciente *getPaciente()
+    {
+        return this->paciente;
+    }
+
+    void setPaciente(Paciente *_Paciente)
+    {
+
+        this->paciente = _Paciente;
+    }
+
+    Medico *getMedico()
+    {
+        return this->medico;
+    }
+
+    void setMedico(Medico *_Medico)
+    {
+
+        this->medico = _Medico;
+    }
+
+    bool getRealizada()
+    {
+        return this->realizada;
+    }
+
+    void setRealizada(bool _Realizada)
+    {
+
+        this->realizada = _Realizada;
+    }
+
+    string getDataHora()
+    {
+        return this->dataHora;
+    }
+
+    void setDataHora(string _DataHora)
+    {
+        this->dataHora = _DataHora;
+    }
+
+    string getDuracao()
+    {
+        return this->duracao;
+    }
+
+    void setDuracao(string _Duracao)
+    {
+        this->duracao = _Duracao;
+    }
+
+    string getConvenio()
+    {
+        return this->convenio;
+    }
+
+    void setConvenio(string _Convenio)
+    {
+        this->convenio = _Convenio;
+    }
+};
+
 int main()
 {
     std::cout << "Hello World!";
