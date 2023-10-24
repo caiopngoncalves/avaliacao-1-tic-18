@@ -462,7 +462,6 @@ public:
         cout << "Informe o CPF do paciente a ser excluido: ";
         cin >> cpf;
 
-        // Excluir o registro
         for (auto it = consultas.begin(); it != consultas.end(); ++it)
         {
             if (it->getPaciente()->getCPF() == cpf && it->getMedico() == medico)
