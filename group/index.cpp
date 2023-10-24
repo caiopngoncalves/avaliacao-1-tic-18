@@ -41,6 +41,44 @@ public:
     }
 };
 
+class Medico
+{
+    string CRM;
+    string Especialidade;
+
+public:
+    string Nome;
+
+    Medico(string _Nome, string _CRM, string _Especialidade)
+    {
+        this->Nome = _Nome;
+        this->setCRM(_CRM);
+        this->setEspecialidade(_Especialidade);
+    }
+
+    string getCRM()
+    {
+        return this->CRM;
+    }
+
+    void setCRM(string _CRM)
+    {
+
+        this->CRM = _CRM;
+    }
+
+    string getEspecialidade()
+    {
+        return this->Especialidade;
+    }
+
+    void setEspecialidade(string _Especialidade)
+    {
+
+        this->Especialidade = _Especialidade;
+    }
+};
+
 int main()
 {
     std::cout << "Hello World!";
