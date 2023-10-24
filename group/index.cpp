@@ -437,7 +437,51 @@ public:
 
     void excluirConsulta(GerenciadorMedicos gerenciadorMedicos)
     {
+        string crm;
+        cout << "CRM do medico: ";
+        cin >> crm;
 
+        if (!gerenciadorMedicos.medicoExiste(crm))
+        {
+            cout << "Medico nao encontrado.\n";
+            return;
+        }
+
+        Medico *medico = gerenciadorMedicos.getMedicoPorCRM(crm);
+
+        cout << "Pacientes com consultas do medico " << medico->Nome << ":\n";
+        for (int i = 0; i < consultas.size(); ++i)
+        {
+            if (consultas[i].getMedico() == medico)
+            {
+                cout << "CPF: " << consultas[i].getPaciente()->getCPF() << ", Nome: " << consultas[i].getPaciente()->Nome << endl;
+            }
+        }
+
+        string cpf;
+        cout << "Informe o CPF do paciente a ser excluido: ";
+        cin >> cpf;
+
+        // Excluir o registro
+        for (auto it = consultas.begin(); it != consultas.end(); ++it)
+        {
+            if (it->getPaciente()->getCPF() == cpf && it->getMedico() == medico)
+            {
+                if (!it->getRealizada())
+                {
+                    consultas.erase(it);
+                    cout << "Consulta excluida com sucesso.\n";
+                    return;
+                }
+                else
+                {
+                    cout << "A consulta nao pode ser excluida porque ja foi realizada.\n";
+                    return;
+                }
+            }
+        }
+
+        cout << "Consulta nao encontrada.\n";
     }
 
     void alterarConsulta(GerenciadorMedicos gerenciadorMedicos)
