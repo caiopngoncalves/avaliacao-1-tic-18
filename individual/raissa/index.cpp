@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cctype>
+
 using namespace std;
 
 class Medico {
@@ -20,9 +22,23 @@ public:
     }
 
     void setCrm(string _crm) {
-        /* validar quantidade de caracteres 11 ou 14
-        */
-        this->crm = _crm;
+        if (_crm.size() == 11 || _crm.size() == 14) {
+            bool isNumeric = true;
+            for (char c : _crm) {
+                if (!std::isdigit(c)) {
+                    isNumeric = false;
+                    break;
+                }
+            }
+
+            if (isNumeric) {
+                this->crm = _crm;
+            } else {
+                cout << "O CRM contem caracteres nao numericos." << endl;
+            }
+        } else {
+            cout << "O CRM nao possui 11 ou 14 caracteres." << endl;
+        }
     }
 
     string getEspecialidade() {
@@ -30,15 +46,17 @@ public:
     }
 
     void setEspecialidade(string _especialidade) {
-        /* validar quantidade de caracteres e formato
-        */
-        this->especialidade = _especialidade;
+        if (_especialidade.size() >= 3) {
+            this->especialidade = _especialidade;
+        } else {
+            cout << "Especialidade invalida." << endl;
+        }
     }
 };
 
 class Paciente {
     string cpf;
-    string dtNascimento; //ideal tipo Data ou struct tm
+    string dtNascimento;
 public:
     string nome;
 
@@ -53,9 +71,23 @@ public:
     }
 
     void setCpf(string _cpf) {
-        /* validar quantidade de caracteres 11 ou 14
-        */
-        this->cpf = _cpf;
+        if (_cpf.size() == 11 || _cpf.size() == 14) {
+            bool isNumeric = true;
+            for (char c : _cpf) {
+                if (!std::isdigit(c)) {
+                    isNumeric = false;
+                    break;
+                }
+            }
+
+            if (isNumeric) {
+                this->cpf = _cpf;
+            } else {
+                cout << "\nO CPF contem caracteres nao numericos." << endl;
+            }
+        } else {
+            cout << "\nO CPF nao possui 11 ou 14 caracteres." << endl;
+        }
     }
 
     string getDtNascimento() {
@@ -63,13 +95,14 @@ public:
     }
 
     void setDtNascimento(string _dtNascimento) {
-        /* validar quantidade de caracteres e formato
-        */
-        this->dtNascimento = _dtNascimento;
+        if (_dtNascimento.size() >= 8) {
+            this->dtNascimento = _dtNascimento;
+        } else {
+            cout << "\nData de Nascimento invalida." << endl;
+        }
     }
 };
 
-// função para localizar CPF em um vector<Paciente*>
 int localizaCpf(vector<Paciente*> pacientes, string cpf) {
     int i = 0;
     for (auto el : pacientes) {
@@ -100,34 +133,33 @@ int main() {
     vector<Medico*> listaMedicos;
 
     do {
-        cout << "\nMenu Principal:\n";
-        cout << "1. Gerenciar Pacientes\n";
-        cout << "2. Gerenciar Medicos\n";
+        cout << "\n----- Menu Principal -----\n";
+        cout << "1. Menu Pacientes\n";
+        cout << "2. Menu Medicos\n";
         cout << "0. Sair\n";
         cout << "\nEscolha uma opcao: ";
         cin >> opcao;
-        cin.ignore(); // Limpar o buffer após ler a opção
+        cin.ignore();
 
         switch (opcao) {
         case 1:
-            // Gerenciar Pacientes
             int auxPaciente;
             do {
-                cout << "\nMenu de Gerenciamento de Pacientes:\n";
+                cout << "\n----- Menu de Gerenciamento de Pacientes -----\n";
                 cout << "1. Incluir Paciente\n";
                 cout << "2. Excluir Paciente (por CPF)\n";
                 cout << "3. Alterar Paciente (por CPF)\n";
                 cout << "4. Listar Pacientes\n";
                 cout << "5. Localizar Paciente (por CPF)\n";
                 cout << "0. Voltar ao Menu Principal\n";
-                cout << "Escolha uma opcao: ";
+                cout << "\nEscolha uma opcao: ";
                 cin >> auxPaciente;
                 cin.ignore();
 
                 string auxNome, auxCpf, auxDtNasc;
 
                 if (auxPaciente == 1) {
-                    cout << "Informe o nome: ";
+                    cout << "\nInforme o nome: ";
                     getline(cin, auxNome);
 
                     cout << "Informe o CPF: ";
@@ -141,24 +173,24 @@ int main() {
                     listaPacientes.push_back(paciente);
                 }
                 else if (auxPaciente == 2) {
-                    cout << "Informe o CPF do paciente que deseja excluir: ";
+                    cout << "\nInforme o CPF do paciente que deseja excluir: ";
                     getline(cin, auxCpf);
                     int posicao = localizaCpf(listaPacientes, auxCpf);
                     if (posicao >= 0) {
                         delete listaPacientes[posicao];
                         listaPacientes.erase(listaPacientes.begin() + posicao);
-                        cout << "Paciente excluido com sucesso." << endl;
+                        cout << "\nPaciente excluido com sucesso." << endl;
                     }
                     else {
-                        cout << "Paciente nao encontrado." << endl;
+                        cout << "\nPaciente nao encontrado." << endl;
                     }
                 }
                 else if (auxPaciente == 3) {
-                    cout << "Informe o CPF do paciente que deseja alterar: ";
+                    cout << "\nInforme o CPF do paciente que deseja alterar: ";
                     getline(cin, auxCpf);
                     int posicao = localizaCpf(listaPacientes, auxCpf);
                     if (posicao >= 0) {
-                        cout << "Informe o novo nome: ";
+                        cout << "\nInforme o novo nome: ";
                         getline(cin, auxNome);
                         cout << "Informe o novo CPF: ";
                         getline(cin, auxCpf);
@@ -169,10 +201,10 @@ int main() {
                         listaPacientes[posicao]->setCpf(auxCpf);
                         listaPacientes[posicao]->setDtNascimento(auxDtNasc);
 
-                        cout << "Paciente alterado com sucesso." << endl;
+                        cout << "\nPaciente alterado com sucesso." << endl;
                     }
                     else {
-                        cout << "Paciente nao encontrado." << endl;
+                        cout << "\nPaciente nao encontrado." << endl;
                     }
                 }
                 else if (auxPaciente == 4) {
@@ -185,7 +217,7 @@ int main() {
                     }
                 }
                 else if (auxPaciente == 5) {
-                    cout << "Informe o CPF do paciente que deseja localizar: ";
+                    cout << "\nInforme o CPF do paciente que deseja localizar: ";
                     getline(cin, auxCpf);
                     int posicao = localizaCpf(listaPacientes, auxCpf);
                     if (posicao >= 0) {
@@ -194,24 +226,23 @@ int main() {
                         cout << "Data de Nascimento: " << listaPacientes[posicao]->getDtNascimento() << endl;
                     }
                     else {
-                        cout << "Paciente nao encontrado." << endl;
+                        cout << "\nPaciente nao encontrado." << endl;
                     }
                 }
                 else if (auxPaciente == 0) {
-                    // Voltar ao Menu Principal
+
                     break;
                 }
                 else {
-                    cout << "Opcao invalida. Tente novamente.\n";
+                    cout << "\nOpcao invalida. Tente novamente.\n";
                 }
             } while (auxPaciente != 0);
             break;
 
         case 2:
-            // Gerenciar Medicos
             int auxMedico;
             do {
-                cout << "\nMenu de Gerenciamento de Medicos:\n";
+                cout << "\n----- Menu de Gerenciamento de Medicos -----\n";
                 cout << "1. Incluir Medico\n";
                 cout << "2. Excluir Medico (por CRM)\n";
                 cout << "3. Alterar Medico (por CRM)\n";
@@ -225,7 +256,7 @@ int main() {
                 string auxNome, auxCRM, auxEspec;
 
                 if (auxMedico == 1) {
-                    cout << "Informe o Nome: ";
+                    cout << "\nInforme o Nome: ";
                     getline(cin, auxNome);
 
                     cout << "Informe o CRM: ";
@@ -239,24 +270,24 @@ int main() {
                     listaMedicos.push_back(medico);
                 }
                 else if (auxMedico == 2) {
-                    cout << "Informe o CRM do medico que deseja excluir: ";
+                    cout << "\nInforme o CRM do medico que deseja excluir: ";
                     getline(cin, auxCRM);
                     int posicao = localizaCrm(listaMedicos, auxCRM);
                     if (posicao >= 0) {
                         delete listaMedicos[posicao];
                         listaMedicos.erase(listaMedicos.begin() + posicao);
-                        cout << "Medico excluido com sucesso." << endl;
+                        cout << "\nMedico excluido com sucesso." << endl;
                     }
                     else {
-                        cout << "Medico nao encontrado." << endl;
+                        cout << "\nMedico nao encontrado." << endl;
                     }
                 }
                 else if (auxMedico == 3) {
-                    cout << "Informe o CRM do medico que deseja alterar: ";
+                    cout << "\nInforme o CRM do medico que deseja alterar: ";
                     getline(cin, auxCRM);
                     int posicao = localizaCrm(listaMedicos, auxCRM);
                     if (posicao >= 0) {
-                        cout << "Informe o novo nome: ";
+                        cout << "\nInforme o novo nome: ";
                         getline(cin, auxNome);
                         cout << "Informe o novo CRM: ";
                         getline(cin, auxCRM);
@@ -267,14 +298,14 @@ int main() {
                         listaMedicos[posicao]->setCrm(auxCRM);
                         listaMedicos[posicao]->setEspecialidade(auxEspec);
 
-                        cout << "Medico alterado com sucesso." << endl;
+                        cout << "\nMedico alterado com sucesso." << endl;
                     }
                     else {
-                        cout << "Medico não encontrado." << endl;
+                        cout << "\nMedico não encontrado." << endl;
                     }
                 }
                 else if (auxMedico == 4) {
-                    cout << "\nLista de Medicos:\n";
+                    cout << "\n--- Lista de Medicos ---\n";
                     for (auto el : listaMedicos) {
                         cout << "Nome: " << el->nome << endl;
                         cout << "CRM: " << el->getCrm() << endl;
@@ -283,39 +314,38 @@ int main() {
                     }
                 }
                 else if (auxMedico == 5) {
-                    cout << "Informe o CRM do medico que deseja localizar: ";
+                    cout << "\nInforme o CRM do medico que deseja localizar: ";
                     getline(cin, auxCRM);
                     int posicao = localizaCrm(listaMedicos, auxCRM);
                     if (posicao >= 0) {
-                        cout << "Nome: " << listaMedicos[posicao]->nome << endl;
+                        cout << "\nNome: " << listaMedicos[posicao]->nome << endl;
                         cout << "CRM: " << listaMedicos[posicao]->getCrm() << endl;
                         cout << "Especialidade: " << listaMedicos[posicao]->getEspecialidade() << endl;
                     }
                     else {
-                        cout << "Medico nao encontrado." << endl;
+                        cout << "\nMedico nao encontrado." << endl;
                     }
                 }
                 else if (auxMedico == 0) {
-                    // Voltar ao Menu Principal
+
                     break;
                 }
                 else {
-                    cout << "Opcao invalida. Tente novamente.\n";
+                    cout << "\nOpcao invalida. Tente novamente.\n";
                 }
             } while (auxMedico != 0);
             break;
 
         case 0:
-            cout << "Saindo do programa.\n";
+            cout << "\nSaindo do programa.\n";
             break;
 
         default:
-            cout << "Opcao invalida. Tente novamente.\n";
+            cout << "\nOpcao invalida. Tente novamente.\n";
         }
 
     } while (opcao != 0);
 
-    // Limpar a memória alocada para pacientes e médicos
     for (auto paciente : listaPacientes) {
         delete paciente;
     }
