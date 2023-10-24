@@ -7,10 +7,10 @@ using namespace std;
 class Paciente
 {
 
-    string CPF;
     string DtNascimento;
 
 public:
+    string CPF;
     string Nome;
 
     Paciente(string _Nome, string _CPF, string _DtNascimento)
@@ -454,7 +454,7 @@ public:
         {
             if (consultas[i].getMedico() == medico)
             {
-                cout << "CPF: " << consultas[i].getPaciente()->getCPF() << ", Nome: " << consultas[i].getPaciente()->Nome << endl;
+                cout << "CPF: " << consultas[i].getPaciente()->CPF << ", Nome: " << consultas[i].getPaciente()->Nome << endl;
             }
         }
 
@@ -464,7 +464,7 @@ public:
 
         for (auto it = consultas.begin(); it != consultas.end(); ++it)
         {
-            if (it->getPaciente()->getCPF() == cpf && it->getMedico() == medico)
+            if (it->getPaciente()->CPF == cpf && it->getMedico() == medico)
             {
                 if (!it->getRealizada())
                 {
@@ -505,7 +505,7 @@ public:
                 Paciente *paciente = consultas[i].getPaciente();
                 if (paciente)
                 {
-                    cout << /* "CPF: " << paciente->getCPF() << */ ", Nome: " << paciente->Nome << endl;
+                    cout << "CPF: " << paciente->CPF << ", Nome: " << paciente->Nome << endl;
                 }
                 else
                 {
@@ -520,7 +520,7 @@ public:
 
         for (auto &consulta : consultas)
         {
-            if (consulta.getPaciente()->getCPF() == cpf && consulta.getMedico() == medico)
+            if (consulta.getPaciente()->CPF == cpf && consulta.getMedico() == medico)
             {
                 char opcao;
                 cout << "A consulta foi realizada? (S/N): ";
