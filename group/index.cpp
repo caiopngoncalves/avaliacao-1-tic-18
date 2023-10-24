@@ -485,6 +485,82 @@ public:
 
     void alterarConsulta(GerenciadorMedicos gerenciadorMedicos)
     {
+        string crm;
+        cout << "CRM do medico: ";
+        cin >> crm;
+
+        if (!gerenciadorMedicos.medicoExiste(crm))
+        {
+            cout << "Medico nao encontrado.\n";
+            return;
+        }
+
+        Medico *medico = gerenciadorMedicos.getMedicoPorCRM(crm);
+
+        cout << "Pacientes com consultas do medico " << medico->Nome << ":\n";
+        for (int i = 0; i < consultas.size(); ++i)
+        {
+            if (consultas[i].getMedico() == medico)
+            {
+                Paciente *paciente = consultas[i].getPaciente();
+                if (paciente)
+                {
+                    cout << /* "CPF: " << paciente->getCPF() << */ ", Nome: " << paciente->Nome << endl;
+                }
+                else
+                {
+                    cout << "Erro: Paciente nulo na consulta.\n";
+                }
+            }
+        }
+
+        string cpf;
+        cout << "Informe o CPF do paciente: ";
+        cin >> cpf;
+
+        for (auto &consulta : consultas)
+        {
+            if (consulta.getPaciente()->getCPF() == cpf && consulta.getMedico() == medico)
+            {
+                char opcao;
+                cout << "A consulta foi realizada? (S/N): ";
+                cin >> opcao;
+
+                if (opcao == 'S' || opcao == 's')
+                {
+                    consulta.setRealizada(true);
+                    cout << "Consulta registrada como realizada.\n";
+                }
+                else
+                {
+                    cout << "Consulta nao realizada.\n";
+                }
+
+                cout << "Deseja alterar a data/hora e a duracao da consulta? (S/N): ";
+                cin >> opcao;
+
+                if (opcao == 'S' || opcao == 's')
+                {
+                    string dataHora, duracao;
+                    cout << "Nova Data e Hora (formato: YYYY-MM-DD HH:mm): ";
+                    cin >> dataHora;
+                    cout << "Nova Duracao: ";
+                    cin >> duracao;
+
+                    consulta.setDataHora(dataHora);
+                    consulta.setDuracao(duracao);
+                    cout << "Consulta alterada com sucesso.\n";
+                }
+                else
+                {
+                    cout << "Consulta nao alterada.\n";
+                }
+
+                return;
+            }
+        }
+
+        cout << "Consulta nao encontrada.\n";
 
     }
 
