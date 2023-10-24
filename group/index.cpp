@@ -447,7 +447,21 @@ public:
 
     void listarConsultas()
     {
-
+        cout << "Lista de Consultas:\n";
+        for (auto consulta : consultas)
+        {
+            cout << "Paciente: " << consulta.getPaciente()->Nome << ", Medico: " << consulta.getMedico()->Nome
+                 << ", Data: " << consulta.getDataHora() << ", Duracao: " << consulta.getDuracao();
+            if (consulta.getRealizada())
+            {
+                cout << " (Realizada)";
+            }
+            else
+            {
+                cout << " (Nao Realizada)";
+            }
+            cout << endl;
+        }
     }
 };
 
