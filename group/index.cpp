@@ -279,6 +279,121 @@ public:
     }
 };
 
+class GerenciadorMedicos
+{
+private:
+    vector<Medico> medicos;
+
+public:
+    void incluirMedico()
+    {
+        string crm, nome, especialidade;
+        cout << "CRM: ";
+        cin >> crm;
+        cout << "Nome: ";
+        cin.ignore();
+        getline(cin, nome);
+        cout << "Especialidade: ";
+        getline(cin, especialidade);
+
+        medicos.push_back(Medico(nome, crm, especialidade));
+    }
+
+    void excluirMedico()
+    {
+        string crm;
+        cout << "Informe o CRM do medico a ser excluido: ";
+        cin >> crm;
+
+        for (auto it = medicos.begin(); it != medicos.end(); ++it)
+        {
+            if (it->getCRM() == crm)
+            {
+                medicos.erase(it);
+                cout << "Medico excluido com sucesso.\n";
+                return;
+            }
+        }
+
+        cout << "Medico nao encontrado.\n";
+    }
+
+    void alterarMedico()
+    {
+        string crm, especialidade;
+        cout << "Informe o CRM do medico a ser alterado: ";
+        cin >> crm;
+
+        for (auto &medico : medicos)
+        {
+            if (medico.getCRM() == crm)
+            {
+                cout << "Novo Nome: ";
+                cin.ignore();
+                getline(cin, medico.Nome);
+                cout << "Nova Especialidade: ";
+                getline(cin, especialidade);
+                medico.setEspecialidade(especialidade);
+                cout << "Medico alterado com sucesso.\n";
+                return;
+            }
+        }
+
+        cout << "Medico nao encontrado.\n";
+    }
+
+    void listarMedicos()
+    {
+        cout << "Lista de Medicos:\n";
+        for (auto &medico : medicos)
+        {
+            cout << "CRM: " << medico.getCRM() << ", Nome: " << medico.Nome << ", Especialidade: " << medico.getEspecialidade() << endl;
+        }
+    }
+
+    void localizarMedico()
+    {
+        string crm;
+        cout << "Informe o CRM do medico: ";
+        cin >> crm;
+
+        for (auto &medico : medicos)
+        {
+            if (medico.getCRM() == crm)
+            {
+                cout << "Medico encontrado:\n";
+                cout << "CRM: " << medico.getCRM() << ", Nome: " << medico.Nome << ", Especialidade: " << medico.getEspecialidade() << endl;
+                return;
+            }
+        }
+        cout << "Medico nao encontrado.\n";
+    }
+
+    bool medicoExiste(string crm)
+    {
+        for (auto &medico : medicos)
+        {
+            if (medico.getCRM() == crm)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    Medico *getMedicoPorCRM(string crm)
+    {
+        for (auto &medico : medicos)
+        {
+            if (medico.getCRM() == crm)
+            {
+                return &medico;
+            }
+        }
+        return nullptr;
+    }
+};
+
 int main()
 {
     std::cout << "Hello World!";
