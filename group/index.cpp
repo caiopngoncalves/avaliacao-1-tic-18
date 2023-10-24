@@ -393,6 +393,63 @@ public:
         return nullptr;
     }
 };
+class GerenciadorConsultas
+{
+private:
+    vector<Consulta> consultas;
+
+public:
+    void incluirConsulta(GerenciadorPacientes gerenciadorPacientes, GerenciadorMedicos gerenciadorMedicos)
+    {
+        string cpf, crm, data, hora, duracao, convenio;
+        cout << "CPF do paciente: ";
+        cin >> cpf;
+
+        if (!gerenciadorPacientes.pacienteExiste(cpf))
+        {
+            cout << "Paciente nao encontrado.\n";
+            return;
+        }
+
+        cout << "CRM do medico: ";
+        cin >> crm;
+
+        if (!gerenciadorMedicos.medicoExiste(crm))
+        {
+            cout << "Medico nao encontrado.\n";
+            return;
+        }
+
+        Paciente *paciente = gerenciadorPacientes.getPacientePorCPF(cpf);
+        Medico *medico = gerenciadorMedicos.getMedicoPorCRM(crm);
+
+        cout << "Data da consulta: ";
+        cin >> data;
+        cout << "Hora da consulta: ";
+        cin >> hora;
+        cout << "Duracao da consulta: ";
+        cin >> duracao;
+        cout << "Convenio: ";
+        cin >> convenio;
+
+        consultas.push_back(Consulta(paciente, medico, false, data + " " + hora, duracao, convenio));
+    }
+
+    void excluirConsulta(GerenciadorMedicos gerenciadorMedicos)
+    {
+
+    }
+
+    void alterarConsulta(GerenciadorMedicos gerenciadorMedicos)
+    {
+
+    }
+
+    void listarConsultas()
+    {
+
+    }
+};
 
 int main()
 {
