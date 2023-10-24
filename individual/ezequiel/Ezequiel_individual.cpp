@@ -160,11 +160,7 @@ private:
   string especialidade;
 
 public:
-  Medico(string novoCRM, string novoNome, string novaEspecialidade) {
-    setCRM(novoCRM);
-    setNome(novoNome);
-    setEspecialidade(novaEspecialidade);
-}
+  Medico() {}
 
   // Getters e Setters
 
@@ -226,28 +222,18 @@ public:
     cout << "Medico incluido com sucesso!" << endl;
   }
 
-  void incluirMedico(vector<Medico> &medicos) {
-    string crm, nome, especialidade;
-    cout << "CRM do medico: ";
+  void excluirMedico(vector<Medico> &medicos) {
+    string crm;
+    cout << "CRM do medico a ser excluido: ";
     cin >> crm;
-
-    if (buscarMedicoPorCRM(medicos, crm) != -1) {
-        cout << "CRM ja existe. Nao e possivel incluir o medico." << endl;
-        return;
+    int indice = buscarMedicoPorCRM(medicos, crm);
+    if (indice != -1) {
+      medicos.erase(medicos.begin() + indice);
+      cout << "Medico excluido com sucesso!" << endl;
+    } else {
+      cout << "Medico nao encontrado." << endl;
     }
-
-    cout << "Nome do medico: ";
-    cin.ignore();
-    getline(cin, nome);
-
-    cout << "Especialidade do medico: ";
-    getline(cin, especialidade);
-
-    Medico novoMedico(crm, nome, especialidade);
-    medicos.push_back(novoMedico);
-    cout << "Medico incluido com sucesso!" << endl;
-}
-
+  }
 
   void alterarMedico(vector<Medico> &medicos) {
     string crm;
