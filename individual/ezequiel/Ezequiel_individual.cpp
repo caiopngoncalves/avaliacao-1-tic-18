@@ -99,33 +99,39 @@ public:
     }
   }
 
-  void alterarPaciente(vector<Paciente> &pacientes) {
+ void alterarPaciente(vector<Paciente> &pacientes) {
     string cpf;
     cout << "CPF do paciente a ser alterado: ";
     cin >> cpf;
     int indice = buscarPacientePorCPF(pacientes, cpf);
     if (indice != -1) {
-      cout << "Paciente encontrado. Realize as alteracoes:" << endl;
-      string novoNome, novaDtNascimento;
+        cout << "Paciente encontrado. Realize as alteracoes:" << endl;
+        string novoNome, novaDataNascimento;
 
-      cout << "Novo CPF: ";
-      cin>>cpf;
-      pacientes[indice].setCPF(cpf);
+        cout << "Deseja alterar o nome (S/N)? ";
+        char resposta;
+        cin >> resposta;
+        if (resposta == 'S' || resposta == 's') {
+            cout << "Novo Nome: ";
+            cin.ignore();
+            getline(cin, novoNome);
+            pacientes[indice].setNome(novoNome);
+        }
 
-      cout << "Novo nome: ";
-      cin.ignore();
-      getline(cin, novoNome);
-      pacientes[indice].setNome(novoNome);
+        cout << "Deseja alterar a data de nascimento (S/N)? ";
+        cin >> resposta;
+        if (resposta == 'S' || resposta == 's') {
+            cout << "Nova Data de Nascimento: ";
+            cin.ignore();
+            getline(cin, novaDataNascimento);
+            pacientes[indice].setDtNascimento(novaDataNascimento);
+        }
 
-      cout << "Nova data de nascimento (dd/mm/aaaa): ";
-      cin >> novaDtNascimento;
-      pacientes[indice].setDtNascimento(novaDtNascimento);
-
-      cout << "Dados do paciente alterados com sucesso!" << endl;
+        cout << "Pocesso de alteacao teminado!" << endl;
     } else {
-      cout << "Paciente nao encontrado." << endl;
+        cout << "Paciente não encontrado." << endl;
     }
-  }
+}
 
   void listarPacientes(const vector<Paciente> &pacientes) {
     cout << "\nLista de Pacientes:" << endl;
@@ -237,31 +243,37 @@ public:
 
   void alterarMedico(vector<Medico> &medicos) {
     string crm;
-    cout << "CRM do medico a ser alterado: ";
+    cout << "CRM do médico a ser alterado: ";
     cin >> crm;
     int indice = buscarMedicoPorCRM(medicos, crm);
     if (indice != -1) {
-      cout << "Medico encontrado. Realize as alteracoes:" << endl;
-      string novoNome, novaEspecialidade;
+        cout << "Médico encontrado. Realize as alterações:" << endl;
+        string novoNome, novaEspecialidade;
 
-      cout << "Novo CRM: ";
-      cin >> crm;
-      medicos[indice].setCRM(crm);
+        cout << "Deseja alterar o nome (S/N)? ";
+        char resposta;
+        cin >> resposta;
+        if (resposta == 'S' || resposta == 's') {
+            cout << "Novo nome: ";
+            cin.ignore();
+            getline(cin, novoNome);
+            medicos[indice].setNome(novoNome);
+        }
 
-      cout << "Novo nome: ";
-      cin.ignore();
-      getline(cin, novoNome);
-      medicos[indice].setNome(novoNome);
+        cout << "Deseja alterar a especialidade (S/N)? ";
+        cin >> resposta;
+        if (resposta == 'S' || resposta == 's') {
+            cout << "Nova especialidade: ";
+            cin.ignore();
+            getline(cin, novaEspecialidade);
+            medicos[indice].setEspecialidade(novaEspecialidade);
+        }
 
-      cout << "Nova especialidade: ";
-      getline(cin, novaEspecialidade);
-      medicos[indice].setEspecialidade(novaEspecialidade);
-
-      cout << "Dados do medico alterados com sucesso!" << endl;
+        cout << "Dados do médico alterados com sucesso!" << endl;
     } else {
-      cout << "Médico não encontrado." << endl;
+        cout << "Médico não encontrado." << endl;
     }
-  }
+}
 
   void listarMedicos(const vector<Medico> &medicos) {
     cout << "\nLista de Medicos:" << endl;
